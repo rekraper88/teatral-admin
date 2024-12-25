@@ -3,6 +3,7 @@ import useAuthContext from "../context/AuthContext";
 import { request } from "../lib/utils";
 import { Navigate } from "@solidjs/router";
 import Auth from "../components/Auth";
+import Logout from "../components/forms/Logout";
 
 const fetchUser = async () => {
     const { data } = await request.get('/api/user');
@@ -17,7 +18,7 @@ export default function AuthLayout(props) {
     return (
         <div>
             <Show when={user.loading}>
-                <div className="text-center">
+                <div className="text-center mt-10">
                     <div class="loading loading-lg loading-spinner"></div>
                 </div>
             </Show>
@@ -26,7 +27,7 @@ export default function AuthLayout(props) {
                     <Auth />
                 </Match>
                 <Match when={user()}>
-                    <div class="navbar px-6 border-b border-gray-100 mb-5 shadow-xs">
+                    <div class="navbar px-6 shadow-xs dark:shadow-md mb-5 shadow-xs">
                         <h1 class="flex-1 text-xl">
                             <a href="/">Teatral</a>
                         </h1>
@@ -36,7 +37,7 @@ export default function AuthLayout(props) {
                                     <a href="/settings">{user().name}</a>
                                 </li>
                                 <li class="mr-3">
-                                    <button class="btn btn-primary" on:click={logout}>Logout</button>
+                                    <Logout />
                                 </li>
                             </ul>
                         </div>

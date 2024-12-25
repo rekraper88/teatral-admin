@@ -1,27 +1,20 @@
 import { createForm, email as validateEmail, minLength, required, email } from "@modular-forms/solid";
 import useAuthContext from "../context/AuthContext";
 import { createSignal, Match, Switch } from "solid-js";
+import Login from "./forms/Login";
+import SubmitButton from "./SubmitButton";
 
 export default function Auth() {
     const [section, setSection] = createSignal('login');
-    const [loginForm, { Form, Field }] = createForm();
     const [loginErrors, setLoginErrors] = createSignal([]);
     const [registerErrors, setRegisterErrors] = createSignal([]);
-    const [registerForm] = createForm();
+    const [registerForm, { Form, Field}] = createForm();
     const { login, register } = useAuthContext();
-
-    const [email, setEmail] = createSignal('')
-    const [password, setPassword] = createSignal('')
 
     const [rName, setRName] = createSignal('')
     const [rEmail, setREmail] = createSignal('')
     const [rPassword, setRPassword] = createSignal('')
     const [repeatPassword, setRepeatPassword] = createSignal('')
-
-    const handleLogin = async (values, event) => {
-        const res = await login(values)
-        setLoginErrors(res);
-    }
 
     const handleRegister = async (values, event) => {
         const res = await register(values)
@@ -37,52 +30,7 @@ export default function Auth() {
                     </div>
                     <Switch>
                         <Match when={section() == "login"}>
-                            <h2 class="mb-3 mt-5">Iniciar sesion</h2>
-                            <Form onSubmit={handleLogin}>
-                                <Field
-                                    name="email"
-                                >
-                                    {(field, props) =>
-                                        <>
-                                            <input
-                                                {...props}
-                                                type="email"
-                                                class="form-input"
-                                                placeholder="Su correo electronico"
-                                                value={email()}
-                                                on:change={() => setEmail(field.value)}
-                                            />
-                                            {field.error && <div class="form-error">{field.error}</div>}
-                                            {loginErrors().email && <div class="form-error">{loginErrors().email}</div>}
-                                        </>
-                                    }
-                                </Field>
-                                <Field
-                                    name="password"
-                                >
-                                    {(field, props) =>
-                                        <>
-                                            <input
-                                                {...props}
-                                                type="password"
-                                                class="form-input"
-                                                placeholder="Su contrasena"
-                                                value={password()}
-                                                on:change={() => setPassword(field.value)}
-                                            />
-                                            {field.error && <div class="form-error">{field.error}</div>}
-                                            {loginErrors().password && <div class="form-error">{loginErrors().password}</div>}
-                                        </>
-                                    }
-                                </Field>
-                                <button type="submit" className="form-button" disabled={loginForm.submitting}>
-                                    {loginForm.submitting ?
-                                        <span class="loading loading-spinner loading-md"></span>
-                                        :
-                                        'Iniciar sesion'
-                                    }
-                                </button>
-                            </Form>
+                            <Login />
                         </Match>
                         <Match when={section() == "register"}>
                             <h2 class="mb-3 mt-5">Registrarse</h2>
@@ -174,13 +122,14 @@ export default function Auth() {
                                         </>
                                     }
                                 </Field>
-                                <button type="submit" className="form-button" disabled={registerForm.submitting}>
+                                <SubmitButton type="submit" className="form-button" loadingVariable={registerForm.submitting}>Crear Cuenta</SubmitButton>
+                                {/* <button type="submit" className="form-button" disabled={registerForm.submitting}>
                                     {registerForm.submitting ?
                                         <span class="loading loading-spinner loading-md"></span>
                                         :
                                         'Crear cuenta'
                                     }
-                                </button>
+                                </button> */}
                             </Form>
                         </Match>
                     </Switch>

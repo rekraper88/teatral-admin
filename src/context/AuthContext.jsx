@@ -38,6 +38,7 @@ export const AuthProvider = props => {
             await request.post('/register', values);
             await getUser();
             window.location.reload();
+            return { success: true }
         } catch (error) {
             if (error.response.status === 422) {
                 setErrors(error.response.data.errors)
@@ -46,18 +47,20 @@ export const AuthProvider = props => {
         }
     }
 
-    const logout = () => {
-        request.post('/logout').then(() => {
+    const logout = async () => {
+        await request.post('/logout').then(() => {
             setUser(null);
             window.location.reload();
         });
+
+        return { success: true }
     }
 
-    createEffect(() => {
-        if (!user()) {
-            getUser();
-        }
-    })
+    // createEffect(() => {
+    //     if (!user()) {
+    //         getUser();
+    //     }
+    // })
 
     return (
         <AuthContext.Provider value={{ user, errors, login, register, getUser, logout }}>{props.children}</AuthContext.Provider>

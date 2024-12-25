@@ -9,8 +9,7 @@ export default function Index() {
     });
     return (
         <div class="prose">
-            <h1>Hello</h1>
-            {user()?.name}
+            <h1>Hello {user()?.name}</h1>
         </div>
     );
 }
