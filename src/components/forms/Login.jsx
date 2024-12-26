@@ -16,15 +16,8 @@ export default function Login({ props }) {
         const res = await login(values)
         console.log(res);
         setErrors(res);
-        // return res;
     }
 
-    // const login = async () => {
-    //     const result = await props.handleLogin();
-    //     console.log(result);
-        
-    //     setErrors(result)
-    // }
     return (
         <>
             <h2 class="mb-3 mt-5">Iniciar sesion</h2>

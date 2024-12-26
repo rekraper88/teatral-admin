@@ -23,11 +23,11 @@ h2 {
 }
 
 .btn {
-    @apply px-4 min-h-9 h-full;
+    @apply px-4 min-h-8 h-full;
 }
 
 .input {
-    @apply px-4 max-h-10 text-sm;
+    @apply px-4 max-h-9 text-sm;
 }
 
 .input:focus {

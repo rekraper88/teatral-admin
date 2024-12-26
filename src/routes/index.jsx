@@ -8,8 +8,14 @@ export default function Index() {
         if (!user()) await getUser();
     });
     return (
-        <div class="prose">
-            <h1>Hello {user()?.name}</h1>
+        <div class="w-full flex h-full px-10 justify-center">
+            <div className="w-6/12">
+                <h2>Cartelera</h2>
+                <div className="mt-2 w-full px-6 py-3 rounded-md bg-gray-100">
+                    <div className="font-bold text-lg">Obras:</div>
+                </div>
+            </div>
+            <div className="w-6/12"></div>
         </div>
     );
 }

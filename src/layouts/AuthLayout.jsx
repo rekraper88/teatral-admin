@@ -27,7 +27,7 @@ export default function AuthLayout(props) {
                     <Auth />
                 </Match>
                 <Match when={user()}>
-                    <div class="navbar px-6 shadow-xs dark:shadow-md mb-5 shadow-xs">
+                    <div class="navbar px-6 shadow-sm mb-5 shadow-xs">
                         <h1 class="flex-1 text-xl">
                             <a href="/">Teatral</a>
                         </h1>
