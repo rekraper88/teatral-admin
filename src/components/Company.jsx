@@ -17,6 +17,14 @@ export default function Company(props) {
         props.refetchData();
     }
 
+    const handleDelete = async () => {
+        await csrf();
+        await request.delete('/companies/' + props.companyId);
+
+        document.getElementById(props.id + '_delete_form').submit();
+        props.refetchData();
+    }
+
     return (
         <div className="my-3">
             <details class="collapse rounded-b-none rounded-md w-full bg-gray-50 collapse-arrow">
@@ -114,7 +122,33 @@ export default function Company(props) {
                         <button>close</button>
                     </form>
                 </dialog>
-                <span className="text-red-600 ml-2">Eliminar</span>
+                <button class="text-red-600 ml-2" onClick={() => document.getElementById(props.id + '_delete').showModal()}>
+                    Eliminar
+                </button>
+                <dialog id={props.id + '_delete'} className="modal">
+                    <div className="modal-box">
+                        <form method="dialog">
+                            {/* if there is a button in form, it will close the modal */}
+                            <button className=" absolute right-5 top-3">✕</button>
+                        </form>
+                        <h3 className="font-bold text-lg">Eliminar {props.name}</h3>
+                        <div className="py-2">
+                            <Form onSubmit={handleDelete}>
+                                <p className="pb-2">Esta seguro que quiere eliminar esta compania? Esta accion es irreversible!</p>
+                                <SubmitButton
+                                    type="submit"
+                                    class="form-button !btn-error !text-white"
+                                    loadingVariable={editForm.submitting}
+                                >
+                                    Eliminar compania
+                                </SubmitButton>
+                            </Form>
+                        </div>
+                    </div>
+                    <form method="dialog" id={props.id + '_delete_form'} className="modal-backdrop">
+                        <button>close</button>
+                    </form>
+                </dialog>
             </div>
         </div>
     );
