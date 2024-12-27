@@ -22,7 +22,12 @@ export default function Companies() {
             <Switch>
                 <Match when={companies.loading}>
                     <div className="text-center mt-4">
-                        <span className="loading loading-spinner loading-lg"></span>
+                    <div class="skeleton h-12 w-full rounded-md  my-3"></div>
+                    <div class="skeleton h-12 w-full rounded-md  my-3"></div>
+                    <div class="skeleton h-12 w-full rounded-md  my-3"></div>
+                    <div class="skeleton h-12 w-full rounded-md  my-3"></div>
+                    <div class="skeleton h-12 w-full rounded-md  my-3"></div>
+                        {/* <span className="loading loading-spinner loading-lg"></span> */}
                     </div>
                 </Match>
                 <Match when={companies.error}>
@@ -40,6 +45,7 @@ export default function Companies() {
                                 name={item.name}
                                 director={item.director}
                                 actors={item.actors}
+                                createdAt={item.created_at}
                             />
                         }
                     </For>

@@ -11,7 +11,7 @@ export default function Index(props) {
     return (
         <div class="w-full flex h-full px-10 justify-center">
             <div className="w-6/12 mx-4">
-                <div className="w-full h-5/6 px-6 py-4 rounded-md bg-gray-100">
+                <div className="w-full h-5/6 px-6 py-4 rounded-md bg-gray-50">
                     <h2>Cartelera</h2>
                     <div className="font-bold text-lg mt-2">Obras:</div>
                 </div>
