@@ -1,21 +1,27 @@
 import { createEffect } from "solid-js";
 import useAuthContext from "../context/AuthContext";
-import { request } from "../lib/utils";
+import NavTabs from "../components/NavTabs";
 
-export default function Index() {
-    const { user, getUser} = useAuthContext();
+export default function Index(props) {
+    const { user, getUser } = useAuthContext();
     createEffect(async () => {
+
         if (!user()) await getUser();
     });
     return (
         <div class="w-full flex h-full px-10 justify-center">
-            <div className="w-6/12">
-                <h2>Cartelera</h2>
-                <div className="mt-2 w-full px-6 py-3 rounded-md bg-gray-100">
-                    <div className="font-bold text-lg">Obras:</div>
+            <div className="w-6/12 mx-4">
+                <div className="w-full px-6 py-4 rounded-md bg-gray-100">
+                    <h2>Cartelera</h2>
+                    <div className="font-bold text-lg mt-2">Obras:</div>
                 </div>
             </div>
-            <div className="w-6/12"></div>
+            <div className="w-6/12 mx-4">
+                <NavTabs />
+                <div className="mt-4">
+                    {props.children}
+                </div>
+            </div>
         </div>
     );
 }
