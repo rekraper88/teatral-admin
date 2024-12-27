@@ -1,11 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 * {
     font-family: 'Nunito Sans';
+    @apply font-medium;
+}
+
+html, body {
+    @apply h-screen overflow-hidden;
+}
+#root {
+    @apply h-full;
+}
+
+#root > div {
+    @apply h-full;
 }
 
 h1 {
@@ -14,6 +25,10 @@ h1 {
 
 h2 {
     @apply text-3xl font-extrabold;
+}
+
+h3 {
+    @apply text-2xl font-extrabold;
 }
 
 .form-input {
@@ -29,7 +44,7 @@ h2 {
 }
 
 .btn {
-    @apply px-4 min-h-8 h-full;
+    @apply px-4 min-h-8 h-full font-bold;
 }
 
 .input {
