@@ -2,7 +2,7 @@ import { createForm } from "@modular-forms/solid";
 import SubmitButton from "../../components/SubmitButton";
 import { createStore } from "solid-js/store";
 import { createEffect, createResource, createSignal, For, Match, Show, Switch } from "solid-js";
-import NewCompanyForm from "../../components/Company/NewCompanyForm";
+import CompanyForm from "../../components/Company/CompanyForm";
 import { csrf, request } from "../../lib/utils";
 import { useNavigate } from "@solidjs/router";
 
@@ -170,7 +170,7 @@ export default function NewPlay() {
                         <a role="tab" class={(secondSection() == "automatic" && "tab-active") + " tab"} on:click={() => setSecondSection('automatic')}>Automatico</a>
                     </div>
                     <Show when={secondSection() == "manual"}>
-                        <NewCompanyForm finalAction={createPlay} />
+                        <CompanyForm finalAction={createPlay} />
                     </Show>
                     <Show when={secondSection() == "automatic" && !companies.loading}>
                         <div className="px-4 py-1.5 rounded-md border border-gray-100 mb-2">

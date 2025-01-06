@@ -18,6 +18,7 @@ import NewPlay from "./routes/plays/new";
 import Play from "./routes/plays/play";
 import EditPlay from "./routes/plays/edit";
 import Company from "./routes/companies/company";
+import EditCompany from "./routes/companies/Edit";
 
 const root = document.getElementById("root");
 
@@ -40,6 +41,7 @@ render(
 					<Route path="/companias/crear" component={New} />
 					<Route path="/companias" component={Companies} />
 					<Route path="/companias/:id" component={Company} />
+					<Route path="/companias/:id/actualizar" component={EditCompany} />
 					<Route path="/calendario" component={Calendar}></Route>
 					<Route path="/salas" component={Rooms}></Route>
 					<Route path="/salas/crear" component={NewRoom}></Route>

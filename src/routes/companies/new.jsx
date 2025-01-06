@@ -2,7 +2,7 @@ import { createForm, required } from "@modular-forms/solid";
 import SubmitButton from "../../components/SubmitButton";
 import { csrf, request } from "../../lib/utils";
 import { useNavigate } from "@solidjs/router";
-import NewCompanyForm from "../../components/Company/NewCompanyForm";
+import CompanyForm from "../../components/Company/CompanyForm";
 
 export default function New() {
     return (
@@ -15,7 +15,7 @@ export default function New() {
                 </a>
                 <h2 class="ml-3">Agregar compania</h2>
             </div>
-            <NewCompanyForm />
+            <CompanyForm />
         </>
     )
 }

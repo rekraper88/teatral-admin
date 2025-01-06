@@ -3,20 +3,29 @@ import { useNavigate } from "@solidjs/router";
 import { csrf, request } from "../../lib/utils";
 import SubmitButton from "../SubmitButton";
 
-export default function NewCompanyForm(props) {
+export default function CompanyForm({ finalAction, company, edit}) {
     const [companyForm, { Form, Field }] = createForm();
 
     const navigate = useNavigate();
 
     const handleCreate = async (values, event) => {
-        await csrf();
-        await request.post('/companies', values).then(res => {
-            if (props.finalAction) {
-                props.finalAction(res);
-            } else {
-                navigate('/companias');
-            }
-        });
+        if (edit) {
+            await request.put('/companies/' + company.id, values).then(res => {
+                if (finalAction) {
+                    finalAction(res);
+                } else {
+                    navigate('/companias/' + company.id);
+                }
+            });
+        } else {
+            await request.post('/companies', values).then(res => {
+                if (finalAction) {
+                    finalAction(res);
+                } else {
+                    navigate('/companias');
+                }
+            });
+        }
     }
 
     return (
@@ -35,6 +44,7 @@ export default function NewCompanyForm(props) {
                             type="text"
                             id="name"
                             class="form-input"
+                            value={company?.name}
                         />
                         {field.error && <div class="form-error">{field.error}</div>}
                     </div>
@@ -54,6 +64,7 @@ export default function NewCompanyForm(props) {
                             type="text"
                             id="director"
                             class="form-input"
+                            value={company?.director}
                         />
                         {field.error && <div class="form-error">{field.error}</div>}
                     </div>
@@ -73,6 +84,7 @@ export default function NewCompanyForm(props) {
                             type="text"
                             id="actores"
                             class="form-input"
+                            value={company?.actors}
                         />
                         {field.error && <div class="form-error">{field.error}</div>}
                     </div>
@@ -84,7 +96,9 @@ export default function NewCompanyForm(props) {
                 class="form-button"
                 loadingVariable={companyForm.submitting}
             >
-                Crear compania
+                {
+                    edit ? 'Actualizar compania' : 'Crear compania'
+                }
             </SubmitButton>
         </Form>
     );

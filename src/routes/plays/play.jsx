@@ -286,7 +286,7 @@ export default function Play() {
                                                             {(item, index) =>
                                                                 <div className="my-3 border-b border-gray-100 flex justify-between">
                                                                     <div className="font-semibold">
-                                                                        {item.play_title}
+                                                                        {item.title}
                                                                     </div>
                                                                     <div className="text-gray-600 text-sm">
                                                                         {item.day.split('-')[2]}/{item.day.split('-')[1]}/{item.day.split('-')[0]}

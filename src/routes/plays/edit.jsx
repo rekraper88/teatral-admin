@@ -2,7 +2,7 @@ import { createForm } from "@modular-forms/solid";
 import SubmitButton from "../../components/SubmitButton";
 import { createStore } from "solid-js/store";
 import { createEffect, createResource, createSignal, For, Match, Show, Switch } from "solid-js";
-import NewCompanyForm from "../../components/Company/NewCompanyForm";
+import CompanyForm from "../../components/Company/CompanyForm";
 import { csrf, request } from "../../lib/utils";
 import { useNavigate, useParams } from "@solidjs/router";
 import Loading from "../../components/Loading";
