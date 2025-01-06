@@ -42,7 +42,7 @@ export default function Auth() {
                                     ]}
                                 >
                                     {(field, props) =>
-                                        <>
+                                        <div class="form-container">
                                             <input
                                                 {...props}
                                                 type="name"
@@ -53,7 +53,7 @@ export default function Auth() {
                                             />
                                             {field.error && <div class="form-error">{field.error}</div>}
                                             {registerErrors().name && <div class="form-error">{registerErrors().name}</div>}
-                                        </>
+                                        </div>
                                     }
                                 </Field>
                                 <Field

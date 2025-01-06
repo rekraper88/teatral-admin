@@ -1,6 +1,7 @@
 import { createEffect, createResource, createSignal, Match, Switch } from "solid-js"
 import { request } from "../../lib/utils";
-import Company from "../../components/Company";
+import Company from "../../components/Company/Company";
+import Item from "../../components/Item";
 
 const fetchCompanies = async () => {
     const response = await request.get('/companies');
@@ -38,15 +39,16 @@ export default function Companies() {
                 <Match when={companies()}>
                     <For each={companies()}>
                         {(item, index) =>
-                            <Company
-                                refetchData={refetchData}
-                                id={index}
-                                companyId={item.id}
-                                name={item.name}
-                                director={item.director}
-                                actors={item.actors}
-                                createdAt={item.created_at}
-                            />
+                            <Item item={item} finalAction={() => setRefetch(prevRefetch => prevRefetch + 1)} urlString="/companies/" itemStr="compania" />
+                            // <Company
+                            //     refetchData={refetchData}
+                            //     id={index}
+                            //     companyId={item.id}
+                            //     name={item.name}
+                            //     director={item.director}
+                            //     actors={item.actors}
+                            //     createdAt={item.created_at}
+                            // />
                         }
                     </For>
                 </Match>

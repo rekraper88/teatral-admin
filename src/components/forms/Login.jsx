@@ -14,7 +14,6 @@ export default function Login({ props }) {
     
     const handleLogin = async (values, event) => {
         const res = await login(values)
-        console.log(res);
         setErrors(res);
     }
 
@@ -26,7 +25,7 @@ export default function Login({ props }) {
                     name="email"
                 >
                     {(field, props) =>
-                        <>
+                        <div class="form-container">
                             <input
                                 {...props}
                                 type="email"
@@ -37,14 +36,14 @@ export default function Login({ props }) {
                             />
                             {field.error && <div class="form-error">{field.error}</div>}
                             {errors().email && <div class="form-error">{errors().email}</div>}
-                        </>
+                        </div>
                     }
                 </Field>
                 <Field
                     name="password"
                 >
                     {(field, props) =>
-                        <>
+                        <div class="form-container">
                             <input
                                 {...props}
                                 type="password"
@@ -55,7 +54,7 @@ export default function Login({ props }) {
                             />
                             {field.error && <div class="form-error">{field.error}</div>}
                             {errors().password && <div class="form-error">{errors().password}</div>}
-                        </>
+                        </div>
                     }
                 </Field>
                 <SubmitButton

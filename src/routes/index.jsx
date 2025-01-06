@@ -16,7 +16,7 @@ export default function Index(props) {
                     <div className="font-bold text-lg mt-2">Obras:</div>
                 </div>
             </div>
-            <div className="w-6/12 mx-4">
+            <div className="w-6/12 px-4 overflow-y-scroll h-5/6">
                 <NavTabs />
                 <div className="mt-4">
                     {props.children}

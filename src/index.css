@@ -1,38 +1,49 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-* {
-    font-family: 'Nunito Sans';
-    @apply font-medium;
+html {
+    font-size: 15px;
 }
 
-html, body {
+* {
+    font-family: 'Work Sans';
+    /* @apply font-medium; */
+}
+
+html,
+body {
     @apply h-screen overflow-hidden;
 }
+
 #root {
     @apply h-full;
 }
 
-#root > div {
+#root>div {
     @apply h-full;
 }
 
 h1 {
-    @apply text-4xl font-extrabold;
+    @apply text-4xl font-semibold;
 }
 
 h2 {
-    @apply text-3xl font-extrabold;
+    @apply text-3xl font-semibold;
 }
 
 h3 {
-    @apply text-2xl font-extrabold;
+    @apply text-2xl font-semibold;
 }
 
 .form-input {
-    @apply input input-bordered w-full my-3;
+    @apply input input-bordered w-full font-normal;
+}
+
+.form-container {
+    @apply my-3;
 }
 
 .form-button {
@@ -44,7 +55,17 @@ h3 {
 }
 
 .btn {
-    @apply px-4 min-h-8 h-full font-bold;
+    @apply px-4 min-h-8 h-full;
+}
+
+a.block>button {
+    @apply text-left;
+}
+
+.btn.btn-primary,
+.form-button,
+.tabs-boxed .tab.tab-active {
+    @apply !text-white;
 }
 
 .input {
