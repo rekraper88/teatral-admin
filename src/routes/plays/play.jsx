@@ -211,7 +211,7 @@ export default function Play() {
                         </dialog>
                     </div>
                 </div>
-                <p class="my-2">{data().play.argument}</p>
+                <p class="my-2 break-words">{data().play.argument}</p>
                 <div className="text-sm text-gray-600">
                     Autor: {data().play.author} • Duracion: {data().play.duration} minutos • Compania: <a href={"/companias/" + data().play.company_id} className="underline">{data().company.name}</a>
                 </div>
@@ -266,7 +266,7 @@ export default function Play() {
                     </Show>
                     <Show when={data().rooms}>
                         <div className="my-6">
-                            <h3>Asignar sala</h3>
+                            <h3>Asignar sala y horario</h3>
                             <For each={data().rooms}>
                                 {(item, index) =>
                                     <div className="flex justify-between px-5 py-3 rounded-md border border-gray-100 my-3">
@@ -282,22 +282,25 @@ export default function Play() {
                                                 </Show>
                                                 <Show when={!schedulesLoading()}>
                                                     <Show when={schedules().length}>
-                                                        <For each={schedules()}>
-                                                            {(item, index) =>
-                                                                <div className="my-3 border-b border-gray-100 flex justify-between">
-                                                                    <div className="font-semibold">
-                                                                        {item.title}
+                                                        <div className="my-5 px-4 py-2 rounded-md border border-gray-100">
+                                                            <span className="text-lg font-semibold">Horarios ocupados</span>
+                                                            <For each={schedules()}>
+                                                                {(item, index) =>
+                                                                    <div className="my-3 py-2 px-4 rounded-md bg-gray-50 flex items-center justify-between">
+                                                                        <div>
+                                                                            {item.title}
+                                                                        </div>
+                                                                        <div className="text-gray-600 text-sm">
+                                                                            {item.day.split('-')[2]}/{item.day.split('-')[1]}/{item.day.split('-')[0]}
+                                                                            &nbsp;
+                                                                            {item.start_time}
+                                                                            -
+                                                                            {item.end_time}
+                                                                        </div>
                                                                     </div>
-                                                                    <div className="text-gray-600 text-sm">
-                                                                        {item.day.split('-')[2]}/{item.day.split('-')[1]}/{item.day.split('-')[0]}
-                                                                        &nbsp;
-                                                                        {item.start_time}
-                                                                        -
-                                                                        {item.end_time}
-                                                                    </div>
-                                                                </div>
-                                                            }
-                                                        </For>
+                                                                }
+                                                            </For>
+                                                        </div>
                                                     </Show>
                                                     <Show when={!schedules().length}>
                                                         <div class="w-full p-5 text-center rounded-md bg-gray-50">
