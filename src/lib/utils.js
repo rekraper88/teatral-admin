@@ -57,15 +57,19 @@ const API_PATH='http://localhost:8000';
         
 
 
-const request = axios.create({
+export const request = axios.create({
     baseURL: 'https://teatral-api-production.up.railway.app',
-    withCredentials: true,
-    withXSRFToken: true
+    withCredentials: true
 });
-const csrf = async () => await request.get('https://teatral-api-production.up.railway.app/sanctum/csrf-cookie');
+
+let csrfFetched = false; // Prevent multiple CSRF requests
 
 request.interceptors.request.use(async (config) => {
-    await csrf(); // Ensure CSRF cookie is set before requests
+    if (!csrfFetched) {
+        await csrf(); // Fetch CSRF token only once
+        csrfFetched = true;
+    }
+
     const token = document.cookie
         .split('; ')
         .find(row => row.startsWith('XSRF-TOKEN='))
@@ -73,8 +77,16 @@ request.interceptors.request.use(async (config) => {
     if (token) {
         config.headers['X-XSRF-TOKEN'] = decodeURIComponent(token);
     }
+
     return config;
 });
+
+export const csrf = async () => {
+    await axios.get('https://teatral-api-production.up.railway.app/sanctum/csrf-cookie', {
+        withCredentials: true
+    });
+};
+
 
 export { request, csrf };
 
