@@ -58,7 +58,7 @@ const API_PATH='http://localhost:8000';
 
 
 export const request = axios.create({
-    baseURL: 'http://localhost:8000',
+    baseURL: 'https://teatral-api-production.up.railway.app',
     withCredentials: true,
     withXSRFToken: true
 });
