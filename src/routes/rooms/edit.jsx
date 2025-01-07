@@ -26,9 +26,6 @@ export default function EditRoom() {
         if (room()?.cols) {
             setCols(room().cols)
         }
-
-        console.log(room());
-
     }, [room()])
 
     const handleEdit = async (values, event) => {

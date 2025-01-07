@@ -1,7 +1,5 @@
 import { createResource, createSignal, For, Match, Show, Switch } from "solid-js"
-import { csrf, request } from "../../lib/utils";
-import { createForm } from "@modular-forms/solid";
-import SubmitButton from "../../components/SubmitButton";
+import { request } from "../../lib/utils";
 import { DeleteRoom } from "../../components/Rooms/Delete";
 
 const getData = async () => {
@@ -11,17 +9,7 @@ const getData = async () => {
 export default function Rooms() {
     const [refetch, setRefetch] = createSignal(0);
     const [rooms] = createResource(refetch, getData);
-    const [deleteRoomForm, { Form }] = createForm();
 
-    const handleDelete = async id => {
-        await csrf();
-        await request.delete('/rooms/' + id);
-        // console.log(res, id);
-
-
-        document.getElementById(id + '_delete_form').submit();
-        setRefetch(prevRefetch => prevRefetch + 1);
-    }
 
     return (
         <>

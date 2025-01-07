@@ -1,6 +1,6 @@
 /* @refresh reload */
 import { render } from "solid-js/web";
-import { Router, Route } from "@solidjs/router";
+import { Router, Route, Navigate } from "@solidjs/router";
 import "./index.css";
 import Index from "./routes/index";
 import { AuthProvider } from "./context/AuthContext";
@@ -19,6 +19,7 @@ import Play from "./routes/plays/play";
 import EditPlay from "./routes/plays/edit";
 import Company from "./routes/companies/company";
 import EditCompany from "./routes/companies/Edit";
+import { CarteleraProvider } from "./context/CarteleraContext";
 
 const root = document.getElementById("root");
 
@@ -31,24 +32,35 @@ if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
 render(
 	() => (
 		<AuthProvider>
-			<Router root={AuthLayout}>
-				<Route path="/" component={Index} />
-				<Route path="/" component={Index}>
-					<Route path="/obras" component={Plays} />
-					<Route path="/obras/:id" component={Play} />
-					<Route path="/obras/:id/actualizar" component={EditPlay} />
-					<Route path="/obras/crear" component={NewPlay} />
-					<Route path="/companias/crear" component={New} />
-					<Route path="/companias" component={Companies} />
-					<Route path="/companias/:id" component={Company} />
-					<Route path="/companias/:id/actualizar" component={EditCompany} />
-					<Route path="/calendario" component={Calendar}></Route>
-					<Route path="/salas" component={Rooms}></Route>
-					<Route path="/salas/crear" component={NewRoom}></Route>
-					<Route path="/salas/:id" component={Room}></Route>
-					<Route path="/salas/:id/actualizar" component={EditRoom}></Route>
-				</Route>
-			</Router>
+			<CarteleraProvider>
+				<Router root={AuthLayout}>
+					<Route path="/" component={Index}>
+						<Route path="" component={Plays} />
+						<Route path="/obras" component={() => <Navigate href="/" />} />
+
+						{/* <CarteleraProvider>
+						<Route path="" component={Plays} />
+					</CarteleraProvider>
+					<CarteleraProvider>
+						<Route path="/obras" component={() => <Navigate href="/" />} />
+					</CarteleraProvider> */}
+						<Route path="" component={Plays} />
+						<Route path="/obras" component={() => <Navigate href="/" />} />
+						<Route path="/obras/:id" component={Play} />
+						<Route path="/obras/:id/actualizar" component={EditPlay} />
+						<Route path="/obras/crear" component={NewPlay} />
+						<Route path="/companias/crear" component={New} />
+						<Route path="/companias" component={Companies} />
+						<Route path="/companias/:id" component={Company} />
+						<Route path="/companias/:id/actualizar" component={EditCompany} />
+						<Route path="/calendario" component={Calendar}></Route>
+						<Route path="/salas" component={Rooms}></Route>
+						<Route path="/salas/crear" component={NewRoom}></Route>
+						<Route path="/salas/:id" component={Room}></Route>
+						<Route path="/salas/:id/actualizar" component={EditRoom}></Route>
+					</Route>
+				</Router>
+			</CarteleraProvider>
 		</AuthProvider>
 	),
 	root,

@@ -17,8 +17,7 @@ export const AuthProvider = props => {
     const login = async values => {
         await csrf();
         try {
-            const res = await request.post('/login', values)
-            // console.log(res);
+            await request.post('/login', values)
 
             await getUser();
             window.location.reload();

@@ -15,8 +15,7 @@ const fetchPlays = async () => {
 
 export default function Plays() {
     const [refetch, setRefetch] = createSignal(0);
-    const [plays] = createResource(refetch, fetchPlays);
-
+    const [plays, { mutate }] = createResource(refetch, fetchPlays);
 
     return (
         <div>
@@ -34,7 +33,14 @@ export default function Plays() {
                 <Match when={plays()}>
                     <For each={plays()}>
                         {(item, index) =>
-                            <Item item={item} finalAction={() => setRefetch(prevRefetch => prevRefetch + 1)} itemStr="obra" urlString="/plays/" />
+                            <Item
+                                cartelera="agregar"
+                                item={item}
+                                finalAction={() => setRefetch(prevRefetch => prevRefetch + 1)}
+                                itemStr="obra"
+                                urlString="/plays/"
+                                mutate={mutate}
+                            />
                         }
                     </For>
                     <Show when={!plays().length}>

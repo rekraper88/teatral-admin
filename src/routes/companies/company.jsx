@@ -9,7 +9,6 @@ const fetchData = async id => {
         return response.data;
     } catch (error) {
         alert(error)
-        console.log(error);
     }
 }
 

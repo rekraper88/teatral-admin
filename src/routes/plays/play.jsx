@@ -37,7 +37,7 @@ export default function Play() {
         try {
             await request.delete('/schedules/' + id);
         } catch (error) {
-            console.log(error);
+            alert(error);
         }
         setDeleteScheduleLoading(false);
         document.getElementById(id + '_delete_form').submit();
@@ -83,7 +83,7 @@ export default function Play() {
                 document.getElementById(roomId() + '_close').submit();
                 setRefetch(prevRefetch => prevRefetch + 1);
             } catch (error) {
-                console.log(error);
+                alert(error);
             }
         }
     }
@@ -95,7 +95,7 @@ export default function Play() {
             alert(error)
         }
         document.getElementById('delete_modal_close').submit();
-        navigate('/obras')
+        navigate('/')
     }
 
     const openChangeCompanyModel = async () => {
@@ -117,9 +117,7 @@ export default function Play() {
             await request.post('/change_company?play_id=' + data().play.id, { company_id: selectedCompany() });
             setRefetch(prevRefetch => prevRefetch + 1);
         } catch (error) {
-            alert('error');
-            console.log(error);
-
+            alert(error);
             setChangeCompanyLoading(false)
         }
         setChangeCompanyLoading(false)
