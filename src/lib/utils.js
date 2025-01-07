@@ -88,5 +88,3 @@ export const csrf = async () => {
 };
 
 
-export { request, csrf };
-
