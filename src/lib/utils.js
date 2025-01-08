@@ -63,4 +63,4 @@ export const request = axios.create({
     withXSRFToken: true
 });
 
-export const csrf = async () => await request.get('http://localhost:8000/sanctum/csrf-cookie');
+export const csrf = async () => await request.get('https://teatral-api-production.up.railway.app/sanctum/csrf-cookie');
