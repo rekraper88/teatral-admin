@@ -30,7 +30,7 @@ import axios from "axios";
 
 // export axios.create
 
-const API_PATH='http://localhost:8000';
+const API_PATH='https://teatral-api-production.up.railway.app';
 //'https://teatral-api-production.up.railway.app'
 // export const request = {
 //     post: async (url, data) => {
