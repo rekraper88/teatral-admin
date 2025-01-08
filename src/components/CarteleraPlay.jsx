@@ -1,4 +1,4 @@
-import { createSignal } from "solid-js";
+import { createEffect, createSignal } from "solid-js";
 import useCarteleraContext from "../context/CarteleraContext";
 import SubmitButton from "./SubmitButton";
 
@@ -15,6 +15,12 @@ export default function CarteleraPlay({ item, parentAction }) {
         // set the id of the removed item (from the cartelera) so that its state can be changed in the plays section
         setIdRemovedFromCartelera(item.id);
     }
+
+    createEffect(() => {
+        if (item.id == idRemovedFromCartelera) {
+            parentAction();
+        }
+    }, idRemovedFromCartelera)
 
     return (
         <div className="my-3 rounded-md px-4 py-2 bg-gray-100 flex justify-between">

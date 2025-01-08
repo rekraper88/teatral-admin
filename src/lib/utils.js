@@ -31,7 +31,7 @@ import axios from "axios";
 // export axios.create
 
 const API_PATH='http://localhost:8000';
-
+//'https://teatral-api-production.up.railway.app'
 // export const request = {
 //     post: async (url, data) => {
 //         try {
@@ -58,9 +58,9 @@ const API_PATH='http://localhost:8000';
 
 
 export const request = axios.create({
-    baseURL: 'https://teatral-api-production.up.railway.app',
+    baseURL: API_PATH,
     withCredentials: true,
     withXSRFToken: true
 });
 
-export const csrf = async () => await request.get('https://teatral-api-production.up.railway.app/sanctum/csrf-cookie');
+export const csrf = async () => await request.get(API_PATH + '/sanctum/csrf-cookie');

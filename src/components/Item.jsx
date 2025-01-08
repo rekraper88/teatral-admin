@@ -7,7 +7,7 @@ import useCarteleraContext from "../context/CarteleraContext";
 export default function Item({ item, finalAction, urlString, itemStr, cartelera }) {
     const [form, { Form }] = createForm();
     const [signState, setSignState] = createSignal(item.is_in_cartelera ? 'disabled' : 'agregar');
-    const { addToCartelera, idRemovedFromCartelera, setNewPlayToAdd } = useCarteleraContext();
+    const { addToCartelera, idRemovedFromCartelera, setNewPlayToAdd, setIdRemovedFromCartelera } = useCarteleraContext();
 
     const handleSubmit = async () => {
         try {
@@ -15,7 +15,9 @@ export default function Item({ item, finalAction, urlString, itemStr, cartelera 
         } catch (error) {
             alert(error)
         }
+        
         document.getElementById(item.id + '_delete_form').submit();
+        if (cartelera) setIdRemovedFromCartelera(item.cartelera_id);
         finalAction();
     }
 

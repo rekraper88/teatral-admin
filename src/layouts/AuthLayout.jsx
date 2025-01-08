@@ -15,9 +15,9 @@ export default function AuthLayout(props) {
     // const [userId, setUserId] = createSignal('');
     const [user] = createResource(getUser);
 
-    createEffect(async () => {
-        await csrf();
-    })
+    // createEffect(async () => {
+    //     await csrf();
+    // })
 
     return (
         <div>

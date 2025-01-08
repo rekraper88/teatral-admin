@@ -10,7 +10,7 @@ import CarteleraPlay from "../components/CarteleraPlay";
 
 export default function Index(props) {
     const { user, getUser } = useAuthContext();
-    const { getCartelera, newPlayToAdd, setNewPlayToAdd } = useCarteleraContext();
+    const { getCartelera, newPlayToAdd, setNewPlayToAdd, idRemovedFromCartelera, setIdRemovedFromCartelera } = useCarteleraContext();
     const [carteleraPlays, { mutate }] = createResource(getCartelera);
 
     createEffect(async () => {
@@ -27,8 +27,14 @@ export default function Index(props) {
     }, newPlayToAdd);
 
     const parentAction = cartelera_id => {
-        mutate(carteleraPlays().filter(p => p.cartelera_id !== cartelera_id));
+        mutate(plays => plays?.filter(p => p.cartelera_id !== cartelera_id));
     };
+
+    createEffect(() => {
+        // console.log(idRemovedFromCartelera());
+        parentAction(idRemovedFromCartelera())
+        // setIdRemovedFromCartelera(0);
+    }, idRemovedFromCartelera)
 
     return (
         <div class="w-full flex h-full px-10 justify-center">

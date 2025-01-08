@@ -14,8 +14,7 @@ const fetchPlays = async () => {
 }
 
 export default function Plays() {
-    const [refetch, setRefetch] = createSignal(0);
-    const [plays, { mutate }] = createResource(refetch, fetchPlays);
+    const [plays, { mutate }] = createResource(fetchPlays);
 
     return (
         <div>
@@ -36,7 +35,7 @@ export default function Plays() {
                             <Item
                                 cartelera="agregar"
                                 item={item}
-                                finalAction={() => setRefetch(prevRefetch => prevRefetch + 1)}
+                                finalAction={() => mutate(currentPlays => currentPlays.filter(play => play.id != item.id))}
                                 itemStr="obra"
                                 urlString="/plays/"
                                 mutate={mutate}
