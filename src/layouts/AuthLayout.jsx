@@ -1,6 +1,6 @@
 import { createEffect, createResource, createSignal, Match, Show, Switch } from "solid-js";
 import useAuthContext from "../context/AuthContext";
-import { request } from "../lib/utils";
+import { csrf, request } from "../lib/utils";
 import { Navigate } from "@solidjs/router";
 import Auth from "../components/Auth";
 import Logout from "../components/forms/Logout";
@@ -14,6 +14,10 @@ export default function AuthLayout(props) {
     const { getUser, logout } = useAuthContext();
     // const [userId, setUserId] = createSignal('');
     const [user] = createResource(getUser);
+
+    createEffect(async () => {
+        await csrf();
+    })
 
     return (
         <div>
